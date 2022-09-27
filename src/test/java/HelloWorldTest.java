@@ -1,16 +1,27 @@
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HelloWorldTest {
 
     @Test
-    public void testHelloWorld() {
-        Response res = RestAssured
-                .get("https://playground.learnqa.ru/api/get_text")
+    public void testRestAssured() {
+        Map<String, String> params = new HashMap<>();
+        params.put("name", "John");
+
+        Response resp = RestAssured
+                .given()
+                .queryParams(params)
+                .get("https://playground.learnqa.ru/api/get_json_homework")
                 .andReturn();
 
-        System.out.println("Text from body: " + res.prettyPrint());
+        String message1 = resp.jsonPath().getString("messages[1].message");
+
+        System.out.println("Второе сообщение из JSON: " + message1);
     }
 }
