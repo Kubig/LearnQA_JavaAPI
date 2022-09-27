@@ -14,12 +14,14 @@ public class HelloWorldTest {
         Map<String, String> params = new HashMap<>();
         params.put("name", "John");
 
-        JsonPath resp = RestAssured
+        Response resp = RestAssured
                 .given()
                 .queryParams(params)
                 .get("https://playground.learnqa.ru/api/get_json_homework")
-                .jsonPath();
+                .andReturn();
 
-        System.out.println("���� JSON: " + resp.prettyPrint());
+        String message1 = resp.jsonPath().getString("messages[1].message");
+
+        System.out.println("Второе сообщение из JSON: " + message1);
     }
 }
