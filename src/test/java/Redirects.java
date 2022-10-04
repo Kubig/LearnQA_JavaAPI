@@ -21,14 +21,14 @@ public class Redirects {
         int statusCode = 0;
         int countRedirect = 0;
         for(int i = 0; ;i++) {
-           mainUrl = redirectUrl(mainUrl, false).getHeader("location");
-           statusCode = redirectUrl(mainUrl, false).getStatusCode();
-           countRedirect++;
-           if(statusCode == 200) {
-               System.out.println("Последняя страница: " + mainUrl);
-               System.out.println("Количество редиректов:" + countRedirect);
-               break;
-           }
+            mainUrl = redirectUrl(mainUrl, false).getHeader("location");
+            statusCode = redirectUrl(mainUrl, false).getStatusCode();
+            countRedirect++;
+            if(statusCode == 200) {
+                System.out.println("Последняя страница: " + mainUrl);
+                System.out.println("Количество редиректов:" + countRedirect);
+                break;
+            }
         }
     }
 }
